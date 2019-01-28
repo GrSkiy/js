@@ -21,6 +21,19 @@
     will-change: transform;
     }
 
+    body {
+      display:
+
+    }
+
+    section {
+      position: relative;
+      width: 40vh;
+      height: 50vh;
+      margin: auto;
+      background: white;
+    }
+
     #test {
     width: 100px;
     height: 100px;
@@ -47,7 +60,7 @@
           elements += element
       }
 
-      $("body").append(elements)
+      $("#artwork").append(elements)
     }
 
     function generatePercent(limit) {
@@ -70,19 +83,24 @@
     }
 
     function generateColor() {
-      let r = generateColorChannel()
-      let g = generateColorChannel()
-      let b = generateColorChannel()
+      const r = generateColorChannel()
+      const g = generateColorChannel()
+      const b = generateColorChannel()
 
-      let color = "rgb(" + [r, g, b].join() + ")"
+      let colorArray = [r, g, b]
 
-      return color
+      const random = Math.floor(Math.random() * colorArray.length)
+
+      colorArray[random] = 0
+
+      const colorCSS = "rgb(" + colorArray.join() + ")"
+
+      return colorCSS
     }
 
     function changeRectanglesCSS() {
       $("div").each(function(index) {
-        const element = $(this)
-        changeRectangleCSS(element)
+        changeRectangleCSS($(this))
       })
     }
 
@@ -119,6 +137,8 @@
   </script>
 </head>
 <body>
+  <section id="artwork"></div>
 
+  </section>
 </body>
 </html>
