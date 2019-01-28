@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+  <script src="jquery.js" charset="utf-8"></script>
+
+  <style>
+    * {
+    transition: all 0.3s ease;
+    }
+
+    html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    }
+
+    div {
+    position: absolute;
+    will-change: transform;
+    }
+
+    #test {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    transition: all 2s ease;
+    }
+
+    .blue {
+    background-color: blue !important;
+    transform: scale(2) rotate(20deg) translateX(100px) translateY(20px) skewX(30deg) skewY(40deg);
+
+    }
+  </style>
+
+  <script type="text/javascript">
+
+    function generateRectangles(quantity) {
+      const element = "<div></div>"
+      let elements = ""
+
+      let step
+
+      for (step = 0; step < quantity; step++) {
+          elements += element
+      }
+
+      $("body").append(elements)
+    }
+
+    function generatePercent(limit) {
+      let number = Math.round(Math.random() * limit)
+      let percent = "%"
+      return number
+    }
+
+    function generateSize() {
+      return generatePercent(95)
+    }
+
+    function generateShift(size) {
+      let limit = 100 - size
+      return generatePercent(limit)
+    }
+
+    function generateColorChannel() {
+      return Math.floor(Math.random() * 255)
+    }
+
+    function generateColor() {
+      let r = generateColorChannel()
+      let g = generateColorChannel()
+      let b = generateColorChannel()
+
+      let color = "rgb(" + [r, g, b].join() + ")"
+
+      return color
+    }
+
+    function changeRectanglesCSS() {
+      $("div").each(function(index) {
+        const element = $(this)
+        changeRectangleCSS(element)
+      })
+    }
+
+    function changeRectanglesONTime() {
+      setTimeout(function() {
+        changeRectanglesCSS()
+        changeRectanglesONTime()
+      }, 1000)
+    }
+
+    function changeRectangleCSS(element) {
+
+      const width = generateSize()
+      const height = generateSize()
+      const x = generateShift(width) + "%"
+      const y = generateShift(height) + "%"
+      const translate = [x, y].join()
+
+      element.css( {
+      // "top": generateShift(height) + "%",
+      // "left": generateShift(width) + "%",
+      "transform": "translate(" + translate + ") translateZ(0)",
+      "width": width + "%",
+      "height": height + "%",
+      "background-color": generateColor()
+      })
+    }
+
+    $(function() {
+      generateRectangles(100)
+      changeRectanglesONTime()
+    })
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>
