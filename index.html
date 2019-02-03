@@ -19,18 +19,17 @@
     div {
     position: absolute;
     will-change: transform;
+    rotate
     }
 
     body {
       display:
-
     }
 
     section {
       position: relative;
       width: 40vh;
       height: 50vh;
-      margin: auto;
       background: white;
     }
 
@@ -44,8 +43,16 @@
     .blue {
     background-color: blue !important;
     transform: scale(2) rotate(20deg) translateX(100px) translateY(20px) skewX(30deg) skewY(40deg);
-
     }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row-reverse;
+    }
+
+
   </style>
 
   <script type="text/javascript">
@@ -60,7 +67,9 @@
           elements += element
       }
 
-      $("#artwork").append(elements)
+      $("#artwork1").append(elements)
+      $("#artwork2").append(elements)
+      $("#artwork3").append(elements)
     }
 
     function generatePercent(limit) {
@@ -99,7 +108,7 @@
     }
 
     function changeRectanglesCSS() {
-      $("div").each(function(index) {
+      $("div").each(function() {
         changeRectangleCSS($(this))
       })
     }
@@ -119,6 +128,7 @@
       const y = generateShift(height) + "%"
       const translate = [x, y].join()
 
+
       element.css( {
       // "top": generateShift(height) + "%",
       // "left": generateShift(width) + "%",
@@ -129,16 +139,75 @@
       })
     }
 
+    function changeSectionsCSS() {
+      $("section").each(function() {
+        changeSectionCSS($(this))
+      })
+    }
+
+    function changeSectionsONTime() {
+      setTimeout(function() {
+        changeSectionsCSS()
+        changeSectionsONTime()
+      }, 1000)
+    }
+
+    function changeSectionCSS(element) {
+
+      const width = generateSize()
+      const height = generateSize()
+      const x = generateShift(width) + "%"
+      const y = generateShift(height) + "%"
+      const translate = [x, y].join()
+
+      element.css( {
+      "transform": "translate(" + translate + ") translateZ(0)",
+      })
+    }
+
+    function randomFlex() {
+
+      // const column = "column"
+      // const column-reverse = "column-reverse"
+      // const row = "row"
+      // const row-reverse = "row-reverse"
+
+      return randomFlex
+    }
+
+    function changeMainFlexONTime() {
+      setTimeout(function() {
+        changeMainFlex()
+        changeMainFlexONTime()
+      }, 1000)
+    }
+
+  function changeMainFlex() {
+    $("main").each(function() {
+      flexChange($(this))
+    })
+  }
+
+    function flexChange() {
+      element.css( {
+      "flex-direction": randomFlex,
+      })
+    }
+
     $(function() {
-      generateRectangles(100)
+      generateRectangles(5)
       changeRectanglesONTime()
+      changeSectionsONTime()
+      // changeMainFlexONTime()
     })
 
   </script>
 </head>
 <body>
-  <section id="artwork"></div>
-
-  </section>
+  <main>
+    <section id="artwork1"></section>
+    <section id="artwork2"></section>
+    <section id="artwork3"></section>
+  </main>
 </body>
 </html>
