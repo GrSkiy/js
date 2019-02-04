@@ -22,10 +22,6 @@
     rotate
     }
 
-    body {
-      display:
-    }
-
     section {
       position: relative;
       width: 40vh;
@@ -167,12 +163,13 @@
 
     function randomFlex() {
 
-      // const column = "column"
-      // const column-reverse = "column-reverse"
-      // const row = "row"
-      // const row-reverse = "row-reverse"
+      const flexes = ["column", "column-reverse", "row", "row-reverse"]
 
-      return randomFlex
+      function randomFlexGen(0, 4) {
+        return Math.random() * (0 - 4) + 4;
+      }
+
+      return flexes(randomFlexGen)
     }
 
     function changeMainFlexONTime() {
@@ -182,15 +179,15 @@
       }, 1000)
     }
 
-  function changeMainFlex() {
-    $("main").each(function() {
-      flexChange($(this))
-    })
-  }
+    function changeMainFlex() {
+      $("main").each(function() {
+        flexChange($(this))
+      })
+    }
 
     function flexChange() {
       element.css( {
-      "flex-direction": randomFlex,
+      "flex-direction": randomFlex(),
       })
     }
 
